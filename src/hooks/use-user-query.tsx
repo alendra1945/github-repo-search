@@ -32,7 +32,7 @@ interface GetGithubUserPayload {
   };
 }
 export async function getGithubUser(
-  payload: GetGithubUserPayload,
+  payload: GetGithubUserPayload
 ): Promise<GithubUser[]> {
   const { data, error } = await apiFetchRequest<{ items: GithubUser[] }>({
     url: "/search/users",
@@ -200,7 +200,7 @@ export const useSearchGithubUser = () => {
   };
   const user = useMemo(
     () => (activeUser ? dataUserByOwnerName[activeUser] : null),
-    [activeUser, dataUserByOwnerName],
+    [activeUser, dataUserByOwnerName]
   );
   return {
     listUser,

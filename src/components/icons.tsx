@@ -24,7 +24,7 @@ export const BgApp = React.forwardRef<SVGSVGElement, IconProps>(
         </svg>
       </div>
     );
-  },
+  }
 );
 export const BgApp2 = React.forwardRef<SVGSVGElement, IconProps>(
   ({ className, ...props }, ref) => {
@@ -42,7 +42,7 @@ export const BgApp2 = React.forwardRef<SVGSVGElement, IconProps>(
         ></path>
       </svg>
     );
-  },
+  }
 );
 
 export const IconsEmpty = React.forwardRef<SVGSVGElement, IconProps>(
@@ -205,7 +205,7 @@ export const IconsEmpty = React.forwardRef<SVGSVGElement, IconProps>(
         />
       </svg>
     );
-  },
+  }
 );
 
 export const IconSearchPage = React.forwardRef<SVGSVGElement, IconProps>(
@@ -370,5 +370,5 @@ export const IconSearchPage = React.forwardRef<SVGSVGElement, IconProps>(
         />
       </svg>
     );
-  },
+  }
 );

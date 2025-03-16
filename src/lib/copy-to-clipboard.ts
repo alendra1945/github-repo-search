@@ -11,7 +11,7 @@ export function copy(
     debug?: boolean;
     format?: string;
     onCopy?(data: DataTransfer | null): void;
-  },
+  }
 ) {
   let reselectPrevious,
     range,

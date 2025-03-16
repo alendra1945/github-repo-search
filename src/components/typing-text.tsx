@@ -120,7 +120,7 @@ function NormalEffect({
     <>
       {text.slice(
         0,
-        Math.max(index, Math.min(text.length, alwaysVisibleCount ?? 1)),
+        Math.max(index, Math.min(text.length, alwaysVisibleCount ?? 1))
       )}
     </>
   );
@@ -170,7 +170,7 @@ function Type({
 }: TypingTextProps) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState<TypingDirection>(
-    TypingDirection.Forward,
+    TypingDirection.Forward
   );
   const [isComplete, setIsComplete] = useState(false);
 
@@ -252,7 +252,7 @@ function Type({
         <CursorWrapper
           waiting={waitingNextCycle}
           visible={Boolean(
-            !smooth && cursor && (!hideCursorOnComplete || !isComplete),
+            !smooth && cursor && (!hideCursorOnComplete || !isComplete)
           )}
         >
           {cursor}

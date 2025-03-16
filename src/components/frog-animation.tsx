@@ -52,7 +52,7 @@ export const FrogAnimation = ({
     <div
       className={cn(
         "h-full w-full absolute left-0 right-0 bg-gradient-to-bl from-teal-400 to-yellow-200",
-        className,
+        className
       )}
       {...props}
       // onMouseMove={handlePointerMove}
