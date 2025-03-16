@@ -7,11 +7,11 @@ import {
   useStateMachineInput,
 } from "@rive-app/react-canvas";
 import { cn } from "@/lib/utils";
-export const FrogAnimation = ({
+export default function FrogAnimation({
   className,
   ...props
-}: React.ComponentProps<"div">) => {
-  const { rive, RiveComponent } = useRive({
+}: React.ComponentProps<"div">) {
+  const { rive, RiveComponent, canvas } = useRive({
     src: "https://alendra1945.github.io/github-repo-search/frog.riv",
     artboard: "Frog Captcha",
     stateMachines: "State Machine 1",
@@ -21,46 +21,42 @@ export const FrogAnimation = ({
       alignment: Alignment.TopCenter,
       layoutScaleFactor: 5,
     }),
-    // layout: new Layout({
-    //   fit: Fit.Layout,
-    //   layoutScaleFactor: 2, // 2x scale of the layout, when using `Fit.Layout`. This allows you to resize the layout as needed.
-    // }),
   });
-  const bumpInput = useStateMachineInput(rive, "State Machine 1", "Tongue");
-  // const numX = useStateMachineInput(rive, "State Machine 1", "numX");
-  // const numY = useStateMachineInput(rive, "State Machine 1", "numY");
-  // const handlePointerMove = (event: MouseEvent<HTMLDivElement, MouseEvent>) => {
-  // const rect = event.target.getBoundingClientRect();
-  // const centerX = rect.width / 2;
-  // const centerY = rect.height / 2;
-  // requestAnimationFrame(() => {
-  //   if (numX && numY) {
-  //     numX.value = Math.max(0, Math.min(event.clientX, 100));
-  //     numY.value = Math.max(0, Math.min(centerY - event.clientY, 100));
-  //   }
-  // });
-  // };
-  const handleClick = () => {
-    console.log(bumpInput);
-    bumpInput?.fire();
+  const tongue = useStateMachineInput(rive, "State Machine 1", "Tongue");
+  const numX = useStateMachineInput(rive, "State Machine 1", "numX");
+  const numY = useStateMachineInput(rive, "State Machine 1", "numY");
+  const handlePointerMove: React.MouseEventHandler = (event) => {
+    if (!canvas) {
+      return;
+    }
+    const rect = canvas.getBoundingClientRect();
+    requestAnimationFrame(() => {
+      if (numX && numY) {
+        numX.value = Math.max(
+          0,
+          Math.min(event.clientX - rect.height / 4, 100)
+        );
+        numY.value = Math.max(
+          0,
+          Math.min(rect.height / 2 - event.clientY, 100)
+        );
+      }
+    });
   };
-
-  // Wait until the rive object is instantiated before adding the Rive
-  // event listener
-  // const [show, setShow] = useState(false);
+  const handleClick = () => {
+    tongue?.fire();
+  };
   return (
     <div
       className={cn(
-        "h-full w-full absolute left-0 right-0 bg-gradient-to-bl from-teal-400 to-yellow-200",
+        "h-full w-full absolute top-0 left-0 right-0 bg-gradient-to-bl from-teal-400 to-yellow-200",
         className
       )}
       {...props}
-      // onMouseMove={handlePointerMove}
+      onMouseMove={handlePointerMove}
+      onClick={handleClick}
     >
-      <RiveComponent
-        onClick={handleClick}
-        className="w-full h-full relative -translate-x-1/3"
-      />
+      <RiveComponent className="absolute left-0 w-[1000px] h-[800px] -translate-x-1/3" />
     </div>
   );
-};
+}

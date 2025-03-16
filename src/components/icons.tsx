@@ -399,3 +399,19 @@ export const FolderIcon = React.forwardRef<SVGSVGElement, IconProps>(
     );
   }
 );
+
+export const DotSpinner = (props: React.ComponentProps<"div">) => {
+  return (
+    <div
+      {...props}
+      className={cn(
+        "flex items-center justify-center gap-0.5 ",
+        props.className
+      )}
+    >
+      <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-[#6DA89E] [animation-delay:-0.3s]" />
+      <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-[#6DA89E] [animation-delay:-0.15s]" />
+      <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-[#6DA89E" />
+    </div>
+  );
+};

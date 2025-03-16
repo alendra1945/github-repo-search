@@ -6,7 +6,7 @@ import { IconSearchPage } from "@/components/icons";
 import TypingText from "@/components/typing-text";
 import { motion } from "framer-motion";
 import { testId } from "@/lib/test-id";
-export const SearchUserForm = () => {
+export default function SearchUserForm() {
   const { form, onSubmit, actionType } = useSearchGithubUser();
   const onGetUser = actionType == ActionType.GET_USER;
 
@@ -54,4 +54,4 @@ export const SearchUserForm = () => {
       </form>
     </motion.div>
   );
-};
+}
