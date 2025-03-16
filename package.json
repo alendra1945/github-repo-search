@@ -12,11 +12,13 @@
     "preview": "vite preview",
     "deploy-pages": "gh-pages -d dist",
     "format": "prettier --write \"./src/**/*.{ts,tsx,md}\"",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "cy:test": "cypress run test"
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [
-      "npm run format"
+      "npm run format",
+      "npm run cy:test"
     ]
   },
   "dependencies": {
