@@ -14,7 +14,7 @@ export const SearchUserForm = () => {
     <motion.div className="relative flex flex-col w-full px-10 gap-y-10 mt-auto transition duration-700 bg-white/10 backdrop-blur-[2px]">
       <IconSearchPage className="absolute -top-14 left-1/2 -translate-x-1/2 -translate-y-[100%] w-[300px] opacity-80 h-[200px] max-w-sm mx-auto" />
       <TypingText
-        text="Stay Updates for Repo Updates!!"
+        text="Stay Updates for User Repository!!"
         className="text-2xl max-w-sm font-semibold"
         repeat={false}
       ></TypingText>

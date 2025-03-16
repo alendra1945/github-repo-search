@@ -8,7 +8,7 @@
     "prepare": "husky",
     "dev": "vite",
     "api-dev": "bun run --hot api/index.ts",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy-pages": "gh-pages -d dist",
