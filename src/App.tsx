@@ -1,21 +1,16 @@
 import { Input } from "./components/ui/input";
 import { SearchIcon, CopyIcon, StarIcon } from "lucide-react";
 import { Button } from "./components/ui/button";
-import {
-  useSearchGithubUser,
-  ActionType,
-  getUserRepo,
-} from "./hooks/use-user-query";
+import { useSearchGithubUser, ActionType } from "./hooks/use-user-query";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import {
   useRive,
-  EventType,
   Alignment,
   Layout,
   Fit,
   useStateMachineInput,
 } from "@rive-app/react-canvas";
-import { MouseEvent, MouseEventHandler, useState } from "react";
+// import { MouseEvent, MouseEventHandler, useState } from "react";
 import { BgApp, BgApp2, IconsEmpty } from "./components/bg-app";
 import TypingText from "./components/typing-text";
 import { Skeleton } from "./components/ui/skeleton";
@@ -57,27 +52,27 @@ function App() {
     // }),
   });
   const bumpInput = useStateMachineInput(rive, "State Machine 1", "Tongue");
-  const numX = useStateMachineInput(rive, "State Machine 1", "numX");
-  const numY = useStateMachineInput(rive, "State Machine 1", "numY");
-  const handlePointerMove = (event: MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const rect = event.target.getBoundingClientRect();
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    requestAnimationFrame(() => {
-      if (numX && numY) {
-        numX.value = Math.max(0, Math.min(event.clientX, 100));
-        numY.value = Math.max(0, Math.min(centerY - event.clientY, 100));
-      }
-    });
-  };
-  const handleClick = (event) => {
+  // const numX = useStateMachineInput(rive, "State Machine 1", "numX");
+  // const numY = useStateMachineInput(rive, "State Machine 1", "numY");
+  // const handlePointerMove = (event: MouseEvent<HTMLDivElement, MouseEvent>) => {
+  // const rect = event.target.getBoundingClientRect();
+  // const centerX = rect.width / 2;
+  // const centerY = rect.height / 2;
+  // requestAnimationFrame(() => {
+  //   if (numX && numY) {
+  //     numX.value = Math.max(0, Math.min(event.clientX, 100));
+  //     numY.value = Math.max(0, Math.min(centerY - event.clientY, 100));
+  //   }
+  // });
+  // };
+  const handleClick = () => {
     console.log(bumpInput);
     bumpInput?.fire();
   };
 
   // Wait until the rive object is instantiated before adding the Rive
   // event listener
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
   const onGetUser = actionType == ActionType.GET_USER;
   const onGetUserRepo = actionType == ActionType.GET_USER_REPO;
 
@@ -86,7 +81,7 @@ function App() {
       <div className="relative overflow-hidden w-full h-full flex flex-col items-center">
         <div
           className="h-full w-full absolute left-0 right-0 bg-gradient-to-bl from-teal-400 to-yellow-200"
-          onMouseMove={handlePointerMove}
+          // onMouseMove={handlePointerMove}
         >
           <RiveComponent
             onClick={handleClick}
@@ -179,7 +174,7 @@ function App() {
                   </div>
                 ))}
               {!onGetUser && !!retry && !listUser.length && (
-                <IconsEmpty className="w-full max-w-[200px] mx-auto" />
+                <IconsEmpty className="w-full h-fit max-w-[200px] mx-auto" />
               )}
             </div>
             <div></div>
@@ -218,46 +213,68 @@ function App() {
                 </Button>
               </div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-5 ">
-              {user?.repo.map((repo) => (
-                <div className="shadow-sm relative  space-y-5 bg-white rounded-xl cursor-pointer overflow-hidden">
-                  <AspectRatio
-                    ratio={1}
-                    className="flex items-center overflow-hidden rounded-md z-0"
-                  >
-                    <Avatar
-                      className="object-cover -mt-2
-                      "
-                    >
-                      <AvatarImage
-                        src={
-                          repo.language
-                            ? `https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${repo.language?.toLowerCase()}/${repo.language?.toLowerCase()}.png`
-                            : `https://cdn.jsdelivr.net/npm/programming-languages-logos/src/programming-languages.png`
-                        }
-                      />
-                      <AvatarFallback className="text-[50px] absolute opacity-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                        {repo.language}
-                      </AvatarFallback>
-                    </Avatar>
-                  </AspectRatio>
-                  <p className="font-gordita absolute  text-[10px] top-2 right-2 bg-emerald-500 px-2 py-1 shadow-sm w-fit rounded text-white">
-                    {repo.private ? "Private" : "Public"}
-                  </p>
-                  <div className="space-y-3 relative p-5 -mt-14 bg-white">
-                    <p className="capitalize font-gordita text-sm">
-                      {repo.name}
-                    </p>
-                    <div className="flex items-center gap-2 text-xs">
-                      <StarIcon className="size-4 stroke-none fill-orange-300" />
-                      <p className="font-gordita font-bold">
-                        {repo.stargazers_count}
+            {(onGetUserRepo || Boolean(user?.repo.length)) && (
+              <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-5">
+                {!onGetUserRepo &&
+                  user?.repo.map((repo) => (
+                    <div className="shadow-sm relative  space-y-5 bg-white rounded-xl cursor-pointer overflow-hidden">
+                      <AspectRatio
+                        ratio={1}
+                        className="flex items-center overflow-hidden rounded-md z-0"
+                      >
+                        <Avatar
+                          className="object-cover -mt-2
+                          "
+                        >
+                          <AvatarImage
+                            src={
+                              repo.language
+                                ? `https://cdn.jsdelivr.net/npm/programming-languages-logos/src/${repo.language?.toLowerCase()}/${repo.language?.toLowerCase()}.png`
+                                : `https://cdn.jsdelivr.net/npm/programming-languages-logos/src/programming-languages.png`
+                            }
+                          />
+                          <AvatarFallback className="text-[50px] absolute opacity-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                            {repo.language}
+                          </AvatarFallback>
+                        </Avatar>
+                      </AspectRatio>
+                      <p className="font-gordita absolute  text-[10px] top-2 right-2 bg-emerald-500 px-2 py-1 shadow-sm w-fit rounded text-white">
+                        {repo.private ? "Private" : "Public"}
                       </p>
+                      <div className="space-y-3 relative p-5 -mt-14 bg-white">
+                        <p className="capitalize font-gordita text-sm">
+                          {repo.name}
+                        </p>
+                        <div className="flex items-center gap-2 text-xs">
+                          <StarIcon className="size-4 stroke-none fill-orange-300" />
+                          <p className="font-gordita font-bold">
+                            {repo.stargazers_count}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+                  ))}
+                {onGetUserRepo &&
+                  Array.from({ length: 12 }).map((_, idx) => (
+                    <div
+                      key={`${idx}`}
+                      className="shadow-sm relative  space-y-5 bg-white rounded-xl cursor-pointer overflow-hidden"
+                    >
+                      <div className="flex flex-col space-y-3">
+                        <Skeleton className="h-[125px] w-[250px]" />
+                        <div className="space-y-2 p-5">
+                          <Skeleton className="h-4 w-full max-w-[200px]" />
+                          <Skeleton className="h-4 w-full max-w-[100px]" />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            )}
+
+            {!onGetUserRepo && !user?.repo.length && (
+              <IconsEmpty className="w-full h-fit max-w-[200px] mx-auto" />
+            )}
           </div>
         </DrawerContent>
       </Drawer>
