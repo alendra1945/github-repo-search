@@ -11,7 +11,7 @@ import { IconsEmpty } from "@/components/icons";
 import { CardUser } from "./card-user";
 import { UserRepoCard } from "./user-repo-card";
 
-export const UserRepoPanel = () => {
+export default function UserRepoPanel() {
   const { actionType, user, setActiveUser } = useSearchGithubUser();
   const onGetUserRepo = actionType == ActionType.GET_USER_REPO;
 
@@ -72,4 +72,4 @@ export const UserRepoPanel = () => {
       </DrawerContent>
     </Drawer>
   );
-};
+}

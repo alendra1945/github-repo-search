@@ -4,7 +4,7 @@ import { IconsEmpty } from "@/components/icons";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CopyBtn } from "@/components/copy-btn";
 import { testId } from "@/lib/test-id";
-export const ListUser = () => {
+export default function ListUser() {
   const { listUser, actionType, retry, getRepo } = useSearchGithubUser();
   const onGetUser = actionType == ActionType.GET_USER;
   return (
@@ -55,4 +55,4 @@ export const ListUser = () => {
       )}
     </div>
   );
-};
+}

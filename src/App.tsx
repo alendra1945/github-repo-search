@@ -1,9 +1,14 @@
+import { lazy } from "react";
+import Loadable from "./components/loadable";
 import { BgApp, BgApp2 } from "./components/icons";
 import { motion } from "framer-motion";
 import { FrogAnimation } from "@/components/frog-animation";
-import { UserRepoPanel } from "@/components/user-repo-panel";
 import { SearchUserForm } from "./components/search-user-form";
-import { ListUser } from "./components/list-user";
+
+const UserRepoPanel = Loadable(
+  lazy(() => import("@/components/user-repo-panel"))
+);
+const ListUser = Loadable(lazy(() => import("@/components/list-user")));
 function App() {
   return (
     <main className="flex flex-col h-[100vh]">
