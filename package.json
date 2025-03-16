@@ -14,7 +14,7 @@
     "deploy-pages": "gh-pages -d dist",
     "format": "prettier --write \"./src/**/*.{ts,tsx,md}\"",
     "cy:open": "cypress open",
-    "cy:test": "cypress run test"
+    "cy:test": "cypress run"
   },
   "lint-staged": {
     "**/*.{ts,tsx}": [
