@@ -5,7 +5,7 @@
   "type": "module",
   "homepage": "https://alendra1945.github.io/github-repo-search",
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky",
     "dev": "vite",
     "api-dev": "bun run --hot api/index.ts",
     "build": "tsc -b && vite build",
