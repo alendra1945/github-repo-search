@@ -11,6 +11,7 @@ import { FrogAnimation } from "@/components/frog-animation";
 import { UserRepoPanel } from "@/components/user-repo-panel";
 import { CopyBtn } from "./components/copy-btn";
 import { testId } from "./lib/test-id";
+import { SearchUserForm } from "./components/search-user-form";
 function App() {
   const { listUser, form, onSubmit, actionType, retry, getRepo } =
     useSearchGithubUser();
@@ -38,48 +39,7 @@ function App() {
             <BgApp className="absolute w-[150px] max-w-xs -top-0 -right-10 -rotate-[45deg]" />
             <BgApp2 className="absolute w-[150px] max-w-xs -top-5 -left-10 -rotate-[90deg]" />
 
-            <motion.div className="relative flex flex-col w-full px-10 gap-y-10 mt-auto transition duration-700 bg-white/10 backdrop-blur-[2px]">
-              <IconSearchPage className="absolute -top-14 left-1/2 -translate-x-1/2 -translate-y-[100%] w-[300px] opacity-80 h-[200px] max-w-sm mx-auto" />
-              <TypingText
-                text="Stay Updates for Repo Updates!!"
-                className="text-2xl max-w-sm font-semibold"
-                repeat={false}
-              ></TypingText>
-              <form
-                className="group relative w-full max-w-lg"
-                onSubmit={onSubmit}
-                {...testId("form-user-search")}
-              >
-                <Input
-                  className="pr-[120px] h-14 bg-white focus-visible:ring-transparent"
-                  {...form.register("search")}
-                  placeholder="who are you looking for?"
-                  disabled={onGetUser}
-                  {...testId("input-user-search")}
-                />
-                {form.getValues("search") && (
-                  <Button
-                    type="button"
-                    className="absolute right-[105px] top-1/2 -translate-y-1/2 size-6 [&_svg]:size-4"
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => form.setValue("search", "")}
-                  >
-                    <XIcon />
-                  </Button>
-                )}
-
-                <Button
-                  disabled={onGetUser}
-                  className="absolute right-0 top-0 cursor-pointer h-full rounded-l-none font-bold text-base bg-[#167364] hover:bg-[#167364] w-[100px]"
-                >
-                  <SearchIcon className="translate-x-[500px] absolute group-hover:translate-x-0 size-6 transition duration-300" />
-                  <span className="translate-x-0 group-hover:translate-x-[500px] transition duration-300">
-                    Find
-                  </span>
-                </Button>
-              </form>
-            </motion.div>
+            <SearchUserForm />
             <div className="flex flex-col gap-y-5 overflow-y-auto px-8 no-scrollbar">
               {onGetUser &&
                 Array.from({ length: 5 }).map((_, idx) => (
